@@ -1,0 +1,9 @@
+.user-management-container {
+    display: flex;
+    margin-left: 250px; 
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }

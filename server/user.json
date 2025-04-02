@@ -1,0 +1,20 @@
+[
+  {
+    "id": "132666708",
+    "fname": "Andreev",
+    "mname": "Buhong",
+    "lname": "Abellera",
+    "username": "Haru",
+    "password": "Eliza",
+    "role": "Admin"
+  },
+  {
+    "id": "34567890",
+    "fname": "fghj",
+    "mname": "ghjk",
+    "lname": "fghjk",
+    "username": "Mew",
+    "password": "Meow",
+    "role": "Student"
+  }
+]
