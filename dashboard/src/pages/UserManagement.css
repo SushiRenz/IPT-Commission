@@ -1,6 +1,7 @@
 .user-management-container {
     display: flex;
     margin-left: 250px; 
+    align-items: center
   }
   
   .content {

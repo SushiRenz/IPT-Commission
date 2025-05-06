@@ -1,0 +1,3 @@
+npm i axios - axios api
+npm i @mui/material @emotion/react @emotion/styled - mui materials
+npm create vite@latest - create vite project

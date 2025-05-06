@@ -11,7 +11,7 @@ function Login() {
 
   async function handleLoginBtn() {
     try {
-      const response = await axios.post("http://localhost:1337/login", { username, password,});
+      const response = await axios.post("http://localhost:1337/login", { username, password } );
       if (response.data.success) {
         navigate("/dashboard");
       } else {
