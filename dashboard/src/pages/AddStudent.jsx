@@ -48,17 +48,18 @@ function AddStudent() {
   }, []);
 
   async function handleAddStudent() {
-    const newStudent = {
+
+    const newStudent = ({
       idnumber: idnumRef.current.value,
       firstname: fnRef.current.value,
       middlename: mnRef.current.value || "",
       lastname: lnRef.current.value,
       course: courseRef.current.value || "",
       year: yearRef.current.value || "",
-    };
-
+    });
+    
     try {
-      await axios.post("http://localhost:1337/addstudents", newStudent);
+      await axios.post("http://localhost:1337/addstudentmongo", newStudent);
       fetchStudent();
       resetForm();
       closeModalAdd();
@@ -68,17 +69,14 @@ function AddStudent() {
   }
 
   const resetForm = () => {
-    if (idnumRef.current) idnumRef.current.value = "";  
-    if (fnRef.current) fnRef.current.value = "";
-    if (mnRef.current) mnRef.current.value = ""; 
-    if (lnRef.current) lnRef.current.value = "";
-    if (courseRef.current) courseRef.current.value = "";
-    if (yearRef.current) yearRef.current.value = "";
+    [idnumRef, fnRef, mnRef, lnRef, courseRef, yearRef].forEach(ref => {
+      if (ref.current) ref.current.value = "";
+    });
   };
 
   async function fetchStudent() {
     try {
-      const response = await axios.get("http://localhost:1337/fetchstudents");
+      const response = await axios.get("http://localhost:1337/fetchstudentsmongo");
       setStud(response.data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -94,7 +92,7 @@ function AddStudent() {
     if (!selectedStudent) return;
     
     try {
-      await axios.delete('http://localhost:1337/deletestudent/${selectedStudent.idnumber}');
+      await axios.delete(`http://localhost:1337/deletestudentmongo/${selectedStudent.idnumber}`);
       fetchStudent();
       closeModalDelete();
     } catch (error) {
@@ -126,7 +124,7 @@ function AddStudent() {
   async function handleEditStudent() {
     try {
       await axios.put(
-        (`http://localhost:1337/updatestudent/${selectedStudent.idnumber}`), 
+        (`http://localhost:1337/updatestudentmongo/${selectedStudent.idnumber}`), 
         editFormData
       );
       

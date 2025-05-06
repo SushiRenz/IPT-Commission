@@ -16,5 +16,14 @@
     "username": "Mew",
     "password": "Meow",
     "role": "Student"
+  },
+  {
+    "id": "123456789",
+    "fname": "jelo",
+    "mname": "lulu",
+    "lname": "nieves",
+    "username": "francJ",
+    "password": "jelo1234",
+    "role": "boss"
   }
 ]

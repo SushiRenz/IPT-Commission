@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const Student = require("./student.model");
+
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/StudentInformationSystem");
 
 const app = express();
 app.use(cors());
@@ -22,38 +26,67 @@ app.get("/", (req, res) => {
     res.send("User Management API");
 });
 
-app.get("/fetchstudents", (req, res) => {
-    res.json(students);
-});
-
-app.post("/addstudents", (req, res) => {
-    const newStudent = req.body;
-    students.push(newStudent);
-    logStudentData("Added", newStudent);
-    res.status(201).json(newStudent);
-});
-
-app.put("/updatestudent/:idnumber", (req, res) => {
-    const studentIndex = students.findIndex(s => s.idnumber === req.params.idnumber);
-    if (studentIndex === -1) {
-        return res.status(404).json({ error: "Student not found" });
+app.get("/fetchstudentsmongo", async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch (error) {
+        console.error("Error fetching students:", error);
+        res.status(500).json({ message: "Error fetching students" });
     }
-
-    students[studentIndex] = { ...students[studentIndex], ...req.body };
-    logStudentData("Updated", students[studentIndex]);
-    res.json(students[studentIndex]);
 });
 
-app.delete("/deletestudent/:idnumber", (req, res) => {
-    const studentIndex = students.findIndex(s => s.idnumber === req.params.idnumber);
-    if (studentIndex === -1) {
-        return res.status(404).json({ error: "Student not found" });
-    }
+app.post("/addstudentmongo", async (req, res) => {
+    try {
+        const { idnumber, firstname, lastname, middlename, course, year } = req.body;
 
-    const deletedStudent = students[studentIndex];
-    students.splice(studentIndex, 1);
-    logStudentData("Deleted", deletedStudent);
-    res.json({ message: "Student deleted successfully" });
+        const newStudent = new Student({ idnumber, firstname, lastname, middlename, course, year });
+
+        await newStudent.save();
+        return res.status(201).json({ message: "Student added successfully", student: newStudent });
+    } catch (error) {
+        console.error("Error adding student:", error);
+        return res.status(500).json({ message: "Error adding student" });
+    }
+});
+
+app.put("/updatestudentmongo/:idnumber", async (req, res) => {
+    try {
+        const { idnumber } = req.params;
+        const { firstname, lastname, middlename, course, year } = req.body;
+
+        const updatedStudent = await Student.findOneAndUpdate(
+            { idnumber },
+            { firstname, lastname, middlename, course, year }, 
+            { new: true }
+        );
+        if (!updatedStudent) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+
+        res.json({ message: "Student updated successfully", student: updatedStudent });
+    } catch (error) {
+        console.error("Error updating student:", error);
+        res.status(500).json({ message: "Error updating student" });
+    }
+});
+
+app.delete("/deletestudentmongo/:idnumber", async (req, res) => {
+    try {
+        const { idnumber } = req.params;
+
+        const deletedStudent = await Student.findOneAndDelete({ idnumber });
+
+        if (!deletedStudent) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+
+        logStudentData("Deleted", deletedStudent);
+        res.json({ message: "Student deleted successfully", student: deletedStudent });
+    } catch (error) {
+        console.error("Error deleting student:", error);
+        res.status(500).json({ message: "Error deleting student" });
+    }
 });
 
 // User Management
@@ -113,6 +146,8 @@ app.delete("/deleteuser/:id", (req, res) => {
     saveUsers(users);
     res.json({ message: "User deleted successfully" });
 });
+
+app.use(express.json());
 
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
