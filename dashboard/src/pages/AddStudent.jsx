@@ -141,7 +141,7 @@ function AddStudent() {
        <main className="content">
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px", alignItems: 'center', marginTop: '40px', marginBottom: '20px' }}>
-              <Typography variant="h4">Student List</Typography>
+              <Typography variant="h4">Product List</Typography>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -194,7 +194,7 @@ function AddStudent() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={7} align="center">No students found</TableCell>
+                      <TableCell colSpan={7} align="center">No Products found</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
@@ -206,7 +206,7 @@ function AddStudent() {
         <Dialog 
           open={openModalAdd} onClose={closeModalAdd} maxWidth="sm" fullWidth
         >
-          <DialogTitle>Add New Student</DialogTitle>
+          <DialogTitle>Add New Product</DialogTitle>
           <DialogContent>
             <TextField 
               inputRef={idnumRef} 

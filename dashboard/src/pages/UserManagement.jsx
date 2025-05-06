@@ -151,7 +151,7 @@ const UserManagement = () => {
             <TableHead>
               <TableRow>
                 <TableCell><strong>ID</strong></TableCell>
-                <TableCell><strong>FisrtName</strong></TableCell>
+                <TableCell><strong>FirstName</strong></TableCell>
                 <TableCell><strong>MiddleName</strong></TableCell>
                 <TableCell><strong>LastName</strong></TableCell>
                 <TableCell><strong>Username</strong></TableCell>

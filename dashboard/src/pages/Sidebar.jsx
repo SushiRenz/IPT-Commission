@@ -13,10 +13,10 @@ function Sidebar() {
           <HomeIcon className="icon" /> Home
         </Link>
         <Link to="/addstudent" className="nav-item">
-          <InfoIcon className="icon" /> Add Student
+          <InfoIcon className="icon" /> Product Menu
         </Link>
         <Link to="/usermanagement" className="nav-item">
-          <ManageAccountsIcon className="icon" /> User Management
+          <ManageAccountsIcon className="icon" /> Employee Management
         </Link>
       </div>
     </div>

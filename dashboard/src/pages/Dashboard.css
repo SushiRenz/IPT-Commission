@@ -6,3 +6,10 @@
 .clock {
   font-size: 20px;
 }
+
+.rice-image {
+  width: 200px; 
+  height: auto;
+  margin: 20px 0;
+  display: block;
+}

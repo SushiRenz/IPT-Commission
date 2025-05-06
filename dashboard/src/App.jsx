@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AddStudent from "./pages/AddStudent";
-import UserManagement from './pages/Usermanagement';
+import UserManagement from './pages/UserManagement';
 
 
 function App() {
