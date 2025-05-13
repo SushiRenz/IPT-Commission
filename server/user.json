@@ -25,5 +25,14 @@
     "username": "francJ",
     "password": "jelo1234",
     "role": "boss"
+  },
+  {
+    "id": "00010001",
+    "fname": "Admin",
+    "mname": "AdminRice",
+    "lname": "Express",
+    "username": "AdminRiceExpress",
+    "password": "Admin01",
+    "role": "Admin"
   }
 ]
